@@ -3,7 +3,7 @@
 A simple and responsive **User Directory Table** built with **React (Vite)** that fetches and displays user data from a public API.  
 It includes features like search, sorting, filtering, pagination, and a mobile-friendly design with card view.
 
-```
+```bash
 
 ##  Live Demo
 🔗 [Deployed on Vercel ](https://user-directory-table.vercel.app/)  
