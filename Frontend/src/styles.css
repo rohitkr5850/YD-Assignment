@@ -1,0 +1,224 @@
+/* Basic-Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  
+  body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight:550;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /*Container */
+  .container {
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+    color: #130f11d5;
+    background: #f0cd41;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #130f11d5;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  
+  /*Controls */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .controls-input{
+    background-color: lightgray;
+    color: black ;
+    
+  }
+
+
+
+
+  .controls input,
+  .controls select {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .controls input:focus,
+  .controls select:focus {
+    border-color: #030303;
+    box-shadow: 0 0 4px rgba(0, 119, 255, 0.4);
+  }
+  
+  /* Table */
+  .table-container {
+    overflow-x: auto;
+    
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+  
+  thead {
+    background-color: #130f11d5;
+    color: white;
+  }
+  
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+  }
+  
+  td img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  /*Hover_effects */
+  tr:hover {
+    transition: background 0.2s ease;
+  }
+  
+  /* Pagination-CSS */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .pagination button {
+    background: #130f11d5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background: #27292b;
+    transform: scale(1.05);
+  }
+  
+  .pagination button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  
+  /* Loader-spinner */
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #050506;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Responsive Design */
+  
+  /* Big-Screen*/
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.7rem;
+    }
+  
+    table th,
+    table td {
+      padding: 10px;
+      font-size: 13px;
+    }
+  
+    .controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .controls input,
+    .controls select {
+      width: 100%;
+    }
+  
+    .pagination {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  /* Mobile-size*/
+  @media (max-width: 480px) {
+    .container {
+      padding: 15px;
+      width: 95%;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    table {
+      font-size: 12px;
+      min-width: unset;
+    }
+  
+    td img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .controls input,
+    .controls select {
+      font-size: 13px;
+      padding: 8px;
+    }
+  
+    .pagination button {
+      font-size: 13px;
+      padding: 6px 12px;
+    }
+  
+    th,
+    td {
+      padding: 8px;
+    }
+  }
+  
