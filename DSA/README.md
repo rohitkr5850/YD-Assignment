@@ -37,7 +37,7 @@ Example:
 
 ---
 
-##  Approach (Optimized & Interview Friendly)
+##  Approach
 
 We keep **two** variables:
 
