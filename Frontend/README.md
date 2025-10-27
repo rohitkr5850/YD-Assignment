@@ -26,7 +26,6 @@ It includes features like search, sorting, filtering, pagination, and a mobile-f
 
 - **Frontend:** React + Vite  
 - **Styling:** CSS3 (Custom responsive design)  
-- **UI Framework (optional):** Tailwind / Material UI / Bootstrap (can be added easily)  
 - **Data Source:** [https://randomuser.me/api/?results=50](https://randomuser.me/api/?results=50)
 
 ---

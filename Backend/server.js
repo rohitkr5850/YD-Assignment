@@ -14,7 +14,7 @@ app.use("/todos", todoRoutes);
 
 // Default route
 app.get("/", (req,res) => {
-    res.send("Welcome to my TODO CRUD API");
+    res.send("WELCOME TO MY TODO-CRUD-API");
 })
 
 // Start the server

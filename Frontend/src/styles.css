@@ -1,224 +1,366 @@
-/* Basic-Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  
-  body {
-    background-color: #f8f9fa;
-    color: #333;
-    font-weight:550;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  /*Container */
-  .container {
-    width: 100%;
-    margin: 40px auto;
-    padding: 20px;
-    color: #130f11d5;
-    background: #f0cd41;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #130f11d5;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-  
-  /*Controls */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+:root {
+  --background-dark: #1a1a1a;
+  --text-light: #f0f0f0;
+  --gold-primary: #ffd700;
+  --gold-accent: #ccac00; 
+  --border-color: #333;
+  --hover-bg: #333;
+  --table-header-bg: #2a2a2a;
+  --button-bg: var(--gold-primary);
+  --button-text: var(--background-dark);
+  --input-bg: #2a2a2a;
+  --input-border: #555;
+  --error-color: #e57373;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden; 
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; 
+  background-color: #242424; 
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-sizing: border-box; 
+}
+
+h1 {
+  font-size: 2.5em;
+  color: var(--gold-primary);
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Controls Section */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.controls-input,
+.controls select,
+.controls button {
+  padding: 12px 18px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: var(--input-bg);
+  color: var(--text-light);
+  outline: none;
+  transition: all 0.3s ease;
+  flex-grow: 1; 
+  flex-shrink: 1; 
+  min-width: 150px;
+  max-width: 250px; 
+  box-sizing: border-box; 
+}
+
+.controls button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto; 
+    min-width: 100px; 
+    max-width: 150px; 
+}
+
+
+.controls-input::placeholder {
+  color: #aaa;
+}
+
+.controls-input:focus,
+.controls select:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+.controls select {
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffd700'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  cursor: pointer;
+}
+
+.controls button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+}
+
+.controls button:hover {
+  background-color: var(--gold-accent);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Table-section */
+.table-container {
+  overflow-x: auto; 
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+table {
+  width: 100%; 
+  border-collapse: collapse;
+  min-width: 500px; 
+}
+
+thead th {
+  background-color: var(--table-header-bg);
+  color: var(--gold-primary);
+  padding: 15px 20px;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 2px solid var(--gold-accent);
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+  text-align: center;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: var(--hover-bg);
+}
+
+tbody td {
+  padding: 15px 20px;
+  vertical-align: middle;
+  color: var(--text-light);
+}
+
+tbody td img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Errror If not found user */
+tbody tr td[colspan="4"] {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--error-color);
+  padding: 40px !important; 
+  background-color: #2a2a2a;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: var(--text-light);
+}
+
+.pagination button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+  flex-shrink: 0; 
+}
+
+.pagination button:disabled {
+  background-color: #555;
+  color: #bbb;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.pagination button:not(:disabled):hover {
+  background-color: var(--gold-accent);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Loader */
+.loader {
+  border: 8px solid var(--input-border);
+  border-top: 8px solid var(--gold-primary);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
   .controls {
-    display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
   }
-  
-  .controls-input{
-    background-color: lightgray;
-    color: black ;
-    
-  }
-
-
-
-
-  .controls input,
+  .controls-input,
   .controls select {
-    padding: 10px 12px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: all 0.2s ease-in-out;
+    max-width: none;
   }
-  
-  .controls input:focus,
-  .controls select:focus {
-    border-color: #030303;
-    box-shadow: 0 0 4px rgba(0, 119, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
   }
-  
-  /* Table */
-  .table-container {
-    overflow-x: auto;
-    
+  .container {
+    padding: 20px;
+    gap: 20px;
   }
-  
-  table {
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .controls {
+    flex-direction: column; 
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .controls-input,
+  .controls select,
+  .controls button {
+    width: 100%; 
+    min-width: unset; 
+    max-width: none; 
+  }
+
+  .controls button {
     width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
+    min-width: unset;
+    max-width: none;
   }
-  
-  thead {
-    background-color: #130f11d5;
-    color: white;
+
+  thead th,
+  tbody td {
+    padding: 12px 15px;
+    font-size: 0.9em;
   }
-  
-  th,
-  td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    word-break: break-word;
+
+  tbody td img {
+    width: 45px;
+    height: 45px;
   }
-  
-  td img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  /*Hover_effects */
-  tr:hover {
-    transition: background 0.2s ease;
-  }
-  
-  /* Pagination-CSS */
+
   .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
+    flex-direction: column; 
+    gap: 10px;
   }
-  
+
   .pagination button {
-    background: #130f11d5;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s ease-in-out;
+    width: 100%;
+    max-width: 250px; 
   }
-  
-  .pagination button:hover:not(:disabled) {
-    background: #27292b;
-    transform: scale(1.05);
-  }
-  
-  .pagination button:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-  }
-  
-  /* Loader-spinner */
-  .loader {
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #050506;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    margin: 40px auto;
-  }
-  
-  @keyframes spin {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  /* Responsive Design */
-  
-  /* Big-Screen*/
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 1.7rem;
-    }
-  
-    table th,
-    table td {
-      padding: 10px;
-      font-size: 13px;
-    }
-  
-    .controls {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .controls input,
-    .controls select {
-      width: 100%;
-    }
-  
-    .pagination {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
-  
-  /* Mobile-size*/
-  @media (max-width: 480px) {
-    .container {
-      padding: 15px;
-      width: 95%;
-    }
-  
-    h1 {
-      font-size: 1.5rem;
-    }
-  
+}
+
+@media (max-width: 580px) {
     table {
-      font-size: 12px;
-      min-width: unset;
+        min-width: 400px; 
     }
-  
-    td img {
-      width: 40px;
-      height: 40px;
+    thead th,
+    tbody td {
+        padding: 10px;
+        font-size: 0.85em;
     }
-  
-    .controls input,
-    .controls select {
-      font-size: 13px;
-      padding: 8px;
+    tbody td img {
+        width: 35px;
+        height: 35px;
     }
-  
-    .pagination button {
-      font-size: 13px;
-      padding: 6px 12px;
+    tbody tr td[colspan="4"] {
+        padding: 30px !important;
     }
-  
-    th,
-    td {
-      padding: 8px;
-    }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
   }
-  
+
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  .controls-input,
+  .controls select,
+  .controls button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  .pagination button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  table {
+      min-width: 350px;
+  }
+}

@@ -18,7 +18,7 @@
  *        largest = number           (update largest)
  *
  *   - Else if number < largest AND number > secondlargest:
- *        secondlargest = number       (it sits between first & second)
+ *        secondlargest = number       
  *
  *    Because of this condition:-
       I will avoid duplicates.

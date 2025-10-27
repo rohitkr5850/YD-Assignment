@@ -11,33 +11,32 @@ function App() {
   const [sortKey, setSortKey] = useState("first_name");
   const [filter, setFilter] = useState("");
 
-  // Fetch 50 users from API
+  const usersPerPage = 5; 
+
+  // Fetch users from API
   const fetchUsers = async () => {
     setLoading(true);
     try {
       const res = await fetch("https://randomuser.me/api/?results=50");
       const data = await res.json();
 
-      // Map to match my table’s structure
       const mappedUsers = data.results.map((u) => ({
         id: u.login.uuid,
         first_name: u.name.first,
         last_name: u.name.last,
         email: u.email,
-      avatar: u.picture.medium,
+        avatar: u.picture.medium,
       }));
 
       setUsers(mappedUsers);
       setFilteredUsers(mappedUsers);
 
-      //  pagination setup 
-      setTotalPages(Math.ceil(mappedUsers.length / 5));
+      setTotalPages(Math.ceil(mappedUsers.length / usersPerPage)); 
     } 
     catch (error) {
       console.error("Error fetching users:", error);
     }
-     finally
-      {
+    finally {
       setLoading(false);
     }
   };
@@ -46,40 +45,54 @@ function App() {
     fetchUsers();
   }, []);
 
-  // Search : Filter : Sort
+  //Search : Filter : Sort 
   useEffect(() => {
     let data = [...users];
 
     if (searchTerm) {
       data = data.filter(
         (user) =>
-          user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) 
-          ||
-          user.last_name.toLowerCase().includes(searchTerm.toLowerCase())
-          ||
+          user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           user.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     if (filter) {
-    data = data.filter((user) => user.email.endsWith(filter));
+      data = data.filter((user) => user.email.endsWith(filter));
     }
+
     data.sort((a, b) =>
-    a[sortKey].localeCompare(b[sortKey], "en", { sensitivity: "base" })
+      a[sortKey].localeCompare(b[sortKey], "en", { sensitivity: "base" })
     );
+
     setFilteredUsers(data);
+
+    setTotalPages(Math.ceil(data.length / usersPerPage));
+
+    setPage(1);
+
   }, [searchTerm, sortKey, filter, users]);
 
-  // Pagination
-  const usersPerPage = 5;
   const startIndex = (page - 1) * usersPerPage;
   const visibleUsers = filteredUsers.slice(startIndex, startIndex + usersPerPage);
 
-  return(
+
+  //RESET FUNCTION
+  const handleReset = () => {
+    setSearchTerm("");
+    setFilter("");
+    setSortKey("first_name");
+    setFilteredUsers(users);
+    setTotalPages(Math.ceil(users.length / usersPerPage));
+    setPage(1);
+  };
+
+  return (
     <div className="container">
       <h1>User Directory Table</h1>
 
-      {/* Controls */}
+      {/*Coontrols */}
       <div className="controls">
         <input className="controls-input"
           type="text"
@@ -93,21 +106,20 @@ function App() {
           <option value="email">Sort by Email</option>
         </select>
 
-
-
         <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="">All Domains</option>
           <option value="example.com">example.com</option>
           <option value="gmail.com">gmail.com</option>
           <option value="yahoo.com">yahoo.com</option>
-          <option value="outlook.com">outlook.com</option>
         </select>
+
+        {/*RESET-BUTTON */}
+        <button onClick={handleReset} >
+          Reset
+        </button>
       </div>
 
-
-
       {/* Table */}
-
       {loading ? (
         <div className="loader"></div>
       ) : (
@@ -122,37 +134,55 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {visibleUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
-                    <img src={user.avatar} alt={user.first_name} />
-                  </td>
-                  <td>{user.first_name}</td>
-                  <td>{user.last_name}</td>
-                  <td>{user.email}</td>
-                </tr>
-              ))}
-            </tbody>
+  {visibleUsers.length === 0 ? (
+    <tr>
+      <td colSpan="4" style={{ padding: "20px", fontWeight: "bold" }}>
+        🚫 No Users Found
+      </td>
+    </tr>
+  ) : (
+    visibleUsers.map((user) => (
+      <tr key={user.id}>
+        <td><img src={user.avatar} alt={user.first_name} /></td>
+        <td>{user.first_name}</td>
+        <td>{user.last_name}</td>
+        <td>{user.email}</td>
+      </tr>
+    ))
+  )}
+</tbody>
+
           </table>
         </div>
       )}
 
-      {/* Pagination */}
-      <div className="pagination">
-        <button onClick={() => setPage((p) => Math.max(p - 1, 1))} disabled={page === 1}>
-          ⬅ Prev
-        </button>
-        <span>Page {page} of {totalPages}</span>
-        <button
-          onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-          disabled={page === totalPages}
-        >
-          Next ➡
-        </button>
-      </div>
+     {/* Pagination */}
+{filteredUsers.length === 0 ? (
+  <div className="pagination">
+    <span>Page 0 of 0</span>
+  </div>
+) : (
+  <div className="pagination">
+    <button
+      onClick={() => setPage((p) => Math.max(p - 1, 1))}
+      disabled={page === 1}
+    >
+      ⬅ Prev
+    </button>
+
+    <span>Page {page} of {totalPages}</span>
+
+    <button
+      onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+      disabled={page === totalPages}
+    >
+      Next ➡
+    </button>
+  </div>
+)}
+
     </div>
   );
 }
 
 export default App;
-
